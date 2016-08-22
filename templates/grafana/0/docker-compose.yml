@@ -1,0 +1,18 @@
+grafana:
+  ports:
+  - ${GRAFANA_PORT}:3000
+  labels:
+    io.rancher.container.pull_image: always
+  tty: true
+  image: dockerregistry.int.nexinto.com/nexinto/grafana:3.1.1
+  hostname: ${GRAFANA_HOSTNAME}
+  volumes:
+  - ${GRAFANA_LOGVOL}:/var/log/grafana
+  - ${GRAFANA_APP_DIR}:/var/lib/grafana
+  - ${GRAFANA_PLUGIN_DIR}:/var/lib/grafana/plugins
+  - ${GRAFANA_INI_DIR}:/etc/grafana
+  privileged: true
+  stdin_open: true
+
+
+

@@ -1,0 +1,48 @@
+.catalog:
+  name: "Grafana"
+  version: "3.1.1"
+  description: "Grafana: Make your metrics beautiful"
+  uuid: grafana-0
+  minimum_rancher_version: v1.1.0
+  questions:
+    - variable: GRAFANA_PORT
+      label: 'Grafana exposed Port:'
+      required: true
+      default: 3000
+      type: int
+    - variable: GRAFANA_LOG_VOL
+      label: ' Grafana Logging Directory:'
+      required: true
+      default: "/var/log/grafana"
+      type: string
+    - variable: GRAFANA_APP_DIR
+      label: ' Grafana Application Directory:'
+      required: true
+      default: "/var/lib/grafana"
+      type: string
+    - variable: GRAFANA_PLUGIN_DIR
+      label: ' Grafana Plugin Directory:'
+      required: true
+      default: "/var/lib/grafana/plugins"
+      type: string
+    - variable: GRAFANA_INI_DIR
+      label: ' Grafana INI Config Directory:'
+      required: true
+      default: "/etc/grafana/"
+      type: string
+    - variable: GRAFANA_HOSTNAME
+      label: ' Grafana Docker Container HOSTNAME:'
+      required: true
+      default: "GRAFANA"
+      type: string
+
+grafana:
+  scale: 1
+  retain_ip: true
+  health_check:
+    port: 3000
+    interval: 30000
+    unhealthy_threshold: 3
+    strategy: recreate
+    response_timeout: 2000
+    healthy_threshold: 2

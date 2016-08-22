@@ -1,0 +1,53 @@
+.catalog:
+  name: "Gitlab"
+  version: "8.10"
+  description: "Gitlab: Git"
+  uuid: gitlab-0
+  minimum_rancher_version: v1.1.0
+  questions:
+    - variable: GITLAB_PORT
+      label: 'Gitlab exposed Port:'
+      required: true
+      default: 80
+      type: int
+    - variable: GITLAB_HTTPS_PORT
+      label: 'Gitlab https Port:'
+      required: true
+      default: 443
+      type: int
+    - variable: GITLAB_SSH_PORT
+      label: 'Gitlab exposed ssh Port:'
+      required: true
+      default: 22
+      type: int
+    - variable: GITLAB_LOG_DIR
+      label: ' Gitlab Logging Directory:'
+      required: true
+      default: "/var/log/gitlab"
+      type: string
+    - variable: GITLAB_DATA_DIR
+      label: 'Gitlab Application Directory:'
+      required: true
+      default: "/var/opt/gitlab"
+      type: string
+    - variable: GITLAB_ETC_DIR
+      label: 'Gitlab etc Directory:'
+      required: true
+      default: "/etc/gitlab"
+      type: string
+    - variable: GITLAB_HOSTNAME
+      label: 'Gitlab Docker Container HOSTNAME:'
+      required: true
+      default: "gitlab.example.com"
+      type: string
+
+gitlab:
+  scale: 1
+  retain_ip: true
+  health_check:
+    port: 3000
+    interval: 30000
+    unhealthy_threshold: 3
+    strategy: recreate
+    response_timeout: 2000
+    healthy_threshold: 2
